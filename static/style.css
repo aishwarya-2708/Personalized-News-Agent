@@ -1,40 +1,421 @@
+/* Example: Headlines a bit bolder */
+h1, h2, h3, h4, h5, input, button {
+  font-weight: 600;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+/* 🎨 Theme Colors */
+:root {
+  --primary-blue: #0078d7; /* Old primary blue */
+  --electric-blue: #00FFFF; /* Vibrant highlight/glow color */
+  --deep-blue: #003366; /* Darker blue for contrast */
+  --text-light: #f0f0f0; /* Light text for dark backgrounds */
+  --text-dark: #333; /* Dark text for light backgrounds */
+  --accent-yellow: #FFD700; /* Gold for trending/attention */
+  --bg-card-light: rgba(220, 240, 255, 0.70); /* Semi-transparent light card */
+  --bg-card-dark: rgba(10, 25, 50, 0.90); /* Semi-transparent dark card */
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f7f9fc;
+  background-image: url("/static/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--text-dark);
   margin: 0;
   padding: 0;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Dark Mode Overrides --- */
+body.dark-mode {
+  background: #121212;
+  color: var(--text-light);
+}
+body.dark-mode .app-title, 
+body.dark-mode h3 {
+  color: var(--electric-blue);
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
 }
 
 .container {
-  width: 80%;
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 20px 40px;
+  flex: 1;
+}
+
+/* --- Header --- */
+.full-width-header {
+  background: rgba(0, 10, 30, 0.8);
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1010;
+  margin: 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   margin: auto;
-  padding: 20px;
+  max-width: 1100px;
+  padding: 0px ;
+  margin-top: -10px;
+}
+
+.app-title {
+  font-size: 2.7rem;
+  color: var(--electric-blue);
   text-align: center;
+  flex-grow: 1;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
 }
 
-input {
-  padding: 10px;
-  width: 250px;
-  margin: 10px;
+#darkModeBtn {
+  padding: 8px 12px;
+  background: var(--deep-blue);
+  color: var(--electric-blue);
+  border: 2px solid var(--electric-blue);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+#darkModeBtn:hover {
+  background: var(--electric-blue);
+  color: var(--deep-blue);
+  box-shadow: 0 0 10px var(--electric-blue);
 }
 
-button {
-  padding: 10px 15px;
-  background: #0078d7;
+/* --- Search & Filters --- */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0 40px;
+}
+
+.search-bar input {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid var(--electric-blue);
+  background: rgba(255, 255, 255, 0.95);
+  width: 600px;
+  height: 28px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+.search-bar input:focus {
+  border-color: var(--accent-yellow);
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+}
+
+.search-bar button {
+ margin-left: -100px;
+  padding: 12px 20px;
+  background: var(--electric-blue);
   border: none;
+  color: var(--deep-blue);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.search-bar button:hover {
+  background: #B3FFFF;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.filter-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.filter-btn {
+  padding: 12px 20px;
+  border: none;
+  background: var(--deep-blue);
+  color: var(--text-light);
+  border-radius: 8px;
+  cursor: pointer;
+  height: 52px;
+  transition: background 0.2s;
+}
+.filter-btn:hover { background: #004d99; }
+
+.filter-content {
+  display: none;
+  position: absolute;
+  background: var(--bg-card-light);
+  color: var(--text-dark);
+  min-width: 220px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 15px;
+  z-index: 1005;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--electric-blue);
+}
+.dark-mode .filter-content {
+  background: var(--bg-card-dark);
+  color: var(--text-light);
+}
+
+.filter-content.show { display: flex; }
+.filter-content select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--primary-blue);
+  background: white;
+  color: var(--text-dark);
+}
+.dark-mode .filter-content select {
+  background: #333;
+  color: var(--text-light);
+  border: 1px solid var(--electric-blue);
+}
+.dark-mode .filter-content select option {
+  background: #333;
+  color: var(--text-light);
+}
+
+/* --- Marquee/Trending Strip --- */
+.trending-marquee-strip {
+  background: var(--accent-yellow);
+  width: 100%;
+  overflow: hidden;
+  padding: 6px 0;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  margin: 0 0 20px 0;
+  z-index: 900; /* Below header */
+}
+
+.marquee {
+  display: block;
+  white-space: nowrap;
+  font-weight: 900;
+  font-size: 1rem;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  line-height: 1.2;
+}
+.marquee-content {
+  display: inline-block;
+  animation: marquee 25s linear infinite;
+}
+.marquee span {
+  margin-right: 60px;
+  transition: color 0.2s;
+}
+.marquee span:hover {
+  text-decoration: underline;
+  color: var(--deep-blue) !important;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* --- Card Design --- */
+.card {
+  position: relative;
+  overflow: visible;
+  background: var(--bg-card-light);
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  transition: 0.3s;
+  backdrop-filter: blur(2px);
+  border-left: 5px solid var(--electric-blue);
+  z-index: 1;
+  
+}
+.dark-mode .card {
+  background: var(--bg-card-dark);
+  border-left-color: var(--accent-yellow);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+  z-index: 1; /* keep low to not overlap dropdown */
+}
+
+.card h3 {
+  margin: 0 0 15px;
+  color: var(--deep-blue);
+  font-size: 1.4rem;
+}
+.dark-mode .card h3 { color: var(--electric-blue); }
+
+.card ul {
+  margin: 0 0 15px;
+  padding-left: 25px;
+  list-style: disc;
+}
+.card ul li { margin-bottom: 8px; }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.actions a, .actions button {
+  padding: 10px 15px;
+  font-size: 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  font-weight: 700;
+}
+.actions button {
+  background: var(--deep-blue);
   color: white;
   cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.actions button:hover {
+  background: var(--primary-blue);
+  box-shadow: 0 0 5px rgba(0, 120, 215, 0.7);
+}
+.actions a.read-more {
+  background: var(--electric-blue);
+  color: var(--deep-blue);
+}
+.actions a.read-more:hover { background: #B3FFFF; }
+
+/* --- Share Options --- */
+.share-btn {
+  position: relative;
+  display: inline-block;
+  z-index: 100;
 }
 
-button:hover {
-  background: #005fa3;
+.share-options {
+  display: none;
+  position: absolute; /* Default: relative to the share-btn parent */
+  top: 45px;
+  left: 0;
+  min-width: 120px; /* Ensures width for proper JS centering */
+  padding: 5px;
+  flex-direction: column;
+  border: 1px solid var(--primary-blue);
+  border-radius: 6px;
+  background: var(--bg-card-light);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  z-index: 10000; /* High enough to stay above cards */
+  transition: none; /* Prevents glitch when JS repositions */
 }
 
-.card {
-  background: white;
-  padding: 15px;
-  margin: 20px 0;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  text-align: left;
+/* Applied dynamically via JS when dropdown is shown */
+.share-options.fixed-position {
+  position: fixed !important; /* Forces it relative to viewport */
+  top: auto !important;
+  left: auto !important;
+}
+
+.dark-mode .share-options {
+  background: var(--bg-card-dark);
+  border-color: var(--electric-blue);
+}
+
+.share-options.show { display: flex; }
+.share-options a {
+  margin: 3px 0;
+  padding: 7px 12px;
+  background: #f1f1f1;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.dark-mode .share-options a {
+  background: #333;
+  color: var(--text-light);
+}
+.share-options a:hover {
+  background: var(--electric-blue);
+  color: var(--deep-blue);
+}
+
+/* --- Loading & Error --- */
+p.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--electric-blue);
+  margin-top: 50px;
+  animation: pulse 1.5s infinite ease-in-out;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+  font-weight: 700;
+}
+.dark-mode p.loading {
+  color: var(--accent-yellow);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+@keyframes pulse {
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.7; transform: scale(1); }
+}
+p.error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #dc3545;
+  margin-top: 50px;
+  font-weight: 600;
+}
+.dark-mode p.error { color: #ff6b6b; }
+
+/* --- Responsive --- */
+@media screen and (max-width:768px) {
+  .search-bar { flex-direction: column; align-items: center; }
+  .search-bar input { width: 90%; }
+  .filter-content { position: static; width: 90%; margin-top: 10px; }
+  .header-content { flex-direction: column; gap: 15px; }
+  .app-title { font-size: 1.8rem; }
+  #darkModeBtn { position: absolute; top: 15px; right: 20px; }
+}
+@media screen and (max-width:500px) {
+  .app-title { font-size: 1.5rem; }
+  .actions a, .actions button { padding: 8px 10px; font-size: 14px; }
+}
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 3px 0;
+  background: var(--deep-blue);
+  color: var(--text-light);
+  font-weight: 500;
+  border-top: 2px solid var(--electric-blue);
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1010;
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+body.dark-mode footer {
+  background: #1e1e1e;
+  color: var(--text-light);
+  border-top: 2px solid var(--accent-yellow);
 }
