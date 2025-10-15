@@ -17,10 +17,11 @@ The challenges I faced :
 - So I used Google Gemini API (gemini-2.5-flash)
   
 ## Screenshots of my implementation.
-<img width="1920" height="964" alt="NewsAgentSS1" src="https://github.com/user-attachments/assets/383b1f93-6cca-4107-a56f-41b3138cb49c" />
-<img width="1920" height="963" alt="NewsAgentSS2" src="https://github.com/user-attachments/assets/17548c07-4fec-4bc2-9f5d-d503f585982d" />
-<img width="1920" height="965" alt="NewsAgentSS3" src="https://github.com/user-attachments/assets/43929b1c-2f77-4832-9902-cd8075a903cb" />
-<img width="1920" height="1020" alt="NewsAgentSS4" src="https://github.com/user-attachments/assets/98525bd9-94fd-4ad9-b372-d41eddecbaf4" />
+<img width="1920" height="1020" alt="NewsAgent1" src="https://github.com/user-attachments/assets/b469e79a-f087-4f27-be89-71b59a565b86" />
+<img width="1920" height="1020" alt="NewsAgent2" src="https://github.com/user-attachments/assets/d8753bdf-bdc6-4833-ac2a-7a99ccd0ffa3" />
+<img width="1920" height="1020" alt="NewsAgent3" src="https://github.com/user-attachments/assets/8826243a-249c-4e18-8be5-38c5d31e2528" />
+<img width="1920" height="1020" alt="NewsAgent4" src="https://github.com/user-attachments/assets/6813bdf5-62d7-4647-a6b8-5ae1f98cde6f" />
+
 
 
 ## Email Address  : aishupatil2708@gmail.com
